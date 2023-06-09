@@ -6,7 +6,7 @@ import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 
 const BoardContainer = styled.section`
-  margin: 5em auto 0 auto;
+  margin: -2em auto 0 auto;
   position:relative;
   display: grid;
 `
