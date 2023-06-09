@@ -28,6 +28,14 @@ const config: GatsbyConfig = {
           families: ['Barlow Semi Condensed', 'Fjalla One']
         }
       }
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /svg/
+        }
+      }
     }
   ],
 }
