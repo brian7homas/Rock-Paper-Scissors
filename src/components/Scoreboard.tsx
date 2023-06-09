@@ -12,11 +12,58 @@ const ScoreboardContainer = styled.section`
   line-height:2em;
   letter-spacing: .02em;
 `
+const CopyContainer = styled.section`
+  font-family: 'Fjalla One';
+  font-size: 2rem;
+  font-weight: 800;
+  color:white;
+`
+const ScoreContainer = styled.div`
+  background-color:white;
+  height: 200px;
+  width: 200px;
+  border-radius: 15px;
+  position: relative;
+  z-index:0;
+`
+const ScoreCopyContainer = styled.div`
+  position: relative;
+  z-index: 1;
+  text-align:center;
+  height:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  font-family: 'Barlow Semi Condensed';
+  padding:1.5em 0 4em 0;
+`
+const ScoreTitle = styled.p`
+  font-size: 2rem;
+  letter-spacing: .075em;
+`
+const ScoreNumber = styled.span`
+  font-family: 'Fjalla One';
+  font-size: 6rem;
+  line-height:auto;
+  letter-spacing: auto;
 `
 const Scoreboard = () => {
   return(
     <ScoreboardContainer>
-      scoreboard
+      <CopyContainer>
+        <p>ROCK</p>
+        <p>PAPER</p>
+        <p>SCISSORS</p>
+        <p>LIZARD</p>
+        <p>SPOCK</p>
+      </CopyContainer>
+      <ScoreContainer>
+        <ScoreCopyContainer>
+          <ScoreTitle>SCORE</ScoreTitle>
+          <ScoreNumber>12</ScoreNumber>
+        </ScoreCopyContainer>
+      </ScoreContainer>
     </ScoreboardContainer>
   )
 }
