@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
+import Button from './Button'
 import Pentagon from '../svg/bg-pentagon.svg'
+import Data from '../data/data'
 
 const BoardContainer = styled.section`
   margin: 5em auto 0 auto;
