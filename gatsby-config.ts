@@ -21,6 +21,14 @@ const config: GatsbyConfig = {
         cssPropOptimization: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Barlow Semi Condensed', 'Fjalla One']
+        }
+      }
+    }
   ],
 }
 
