@@ -1,4 +1,5 @@
 import React from "react";
+import gsap from 'gsap'
 import styled from "@emotion/styled";
 
 const Button = (props:any) => {
@@ -28,9 +29,17 @@ const ButtonInlay = styled.div`
   justify-content: center;
   align-items:center;
 `
+let tl = gsap.timeline({paused: true})
+  const round = async (name:string) => {
+    const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
+    console.log(countOccurrences(gsap.utils.toArray(".btn")))
+    tl.to(`.btn-container--${name}`, { transform: 'scale(1.7)', zIndex:4 })
+    tl.play()
+  }
   return(
-    <ButtonContainer>
-      <ButtonInlay>
+      <ButtonInlay 
+        onClick={async () => await round(props.name)}
+        >
         {props.icon}
       </ButtonInlay>
     </ButtonContainer>
