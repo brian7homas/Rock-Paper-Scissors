@@ -1,6 +1,10 @@
 import React from "react";
 import gsap from 'gsap'
 import styled from "@emotion/styled";
+import { CustomEase } from "gsap/CustomEase";
+import StartRound from "../animations/StartRoung";
+gsap.registerPlugin(CustomEase);
+CustomEase.create("custom", "M0,0 C1.196,0.016 0.282,0.334 1,1 ");
 
 const Button = (props:any) => {
   const ButtonContainer = styled.div`
@@ -29,13 +33,24 @@ const ButtonInlay = styled.div`
   justify-content: center;
   align-items:center;
 `
-let tl = gsap.timeline({paused: true})
-  const round = async (name:string) => {
-    const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
-    console.log(countOccurrences(gsap.utils.toArray(".btn")))
-    tl.to(`.btn-container--${name}`, { transform: 'scale(1.7)', zIndex:4 })
-    tl.play()
-  }
+const round = async (name:string) => {
+  let buttons = gsap.utils.toArray(".btn")
+  let animateOut:any = []
+  
+  // find matching class/element
+  const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
+    
+    // find elements to animate out
+    if(item.classList[1] != `btn-container--${val}`){
+      animateOut.push(item)
+    }
+    
+    // matching class name sits in 2nd position of classList array/object
+    return item.classList[1] === `btn-container--${val}`
+  }).length;
+  findMatches(buttons, name)
+  StartRound(name, animateOut, props.color)
+}
   return(
     <ButtonContainer className={`btn btn-container--${props.name}`}>
       <ButtonInlay 
