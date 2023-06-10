@@ -32,6 +32,7 @@ const ButtonInlay = styled.div`
   display:flex;
   justify-content: center;
   align-items:center;
+  cursor:pointer;
 `
 const round = async (name:string) => {
   let buttons = gsap.utils.toArray(".btn")
