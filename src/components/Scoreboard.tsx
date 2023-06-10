@@ -13,12 +13,12 @@ const ScoreboardContainer = styled.section`
   display:flex;
   align-items: center;
   justify-content: space-between;
-  line-height:1em;
+  line-height:1.5em;
   letter-spacing: .02em;
 `
 const CopyContainer = styled.section`
   font-family: 'Fjalla One';
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color:white;
 `
