@@ -52,7 +52,7 @@ const ScoreNumber = styled.span`
   line-height:auto;
   letter-spacing: auto;
 `
-const Scoreboard = () => {
+const Scoreboard = (props) => {
   return(
     <ScoreboardContainer>
       <CopyContainer>
@@ -65,7 +65,7 @@ const Scoreboard = () => {
       <ScoreContainer>
         <ScoreCopyContainer>
           <ScoreTitle>SCORE</ScoreTitle>
-          <ScoreNumber>12</ScoreNumber>
+          <ScoreNumber>{props.points}</ScoreNumber>
         </ScoreCopyContainer>
       </ScoreContainer>
     </ScoreboardContainer>

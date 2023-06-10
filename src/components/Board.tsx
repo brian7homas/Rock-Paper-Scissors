@@ -17,7 +17,7 @@ const BoardContainer = styled.section`
     margin: -6em auto 0 auto;
   }
 `
-const Board = () => {
+const Board = (props) => {
   return(
     <BoardContainer>
       <Pentagon 
@@ -35,6 +35,7 @@ const Board = () => {
               shadow={item.shadow}
               icon={item.icon}
               position={item.position}
+              addPoints={props.addPoints}
             />
           )
         })

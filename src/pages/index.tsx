@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import { Global, css } from '@emotion/react'
 import styled from "@emotion/styled"
@@ -15,6 +16,7 @@ const MainContainer = styled.main`
   justify-content:space-between;
 `
 const IndexPage: React.FC<PageProps> = () => {
+  const [points, addPoints] = useState(0)
   return (
     <>
       <Global 
@@ -36,8 +38,12 @@ const IndexPage: React.FC<PageProps> = () => {
           `}
         />
         <MainContainer>
-          <Scoreboard/>
-          <Board/>
+          <Scoreboard
+            points={points}
+          />
+          <Board 
+            addPoints={addPoints}
+          />
           <Footer/>
         </MainContainer>
     </>
