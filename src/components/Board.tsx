@@ -17,6 +17,23 @@ const BoardContainer = styled.section`
     margin: -6em auto 0 auto;
   }
 `
+const Opponent = styled.div`
+  background: white;
+  border:none;
+  border-radius: 50% 50%;
+  height: 175px;
+  width: 175px;
+  position: absolute;
+  z-index:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  left: 30px;
+  display:none;
+  opacity:0;
+  visibility:0;
+  z-index:4;
+`
 const Board = (props) => {
   return(
     <BoardContainer>
@@ -40,7 +57,7 @@ const Board = (props) => {
           )
         })
       }
-      
+      <Opponent className='opponent'/>
     </BoardContainer>
   )  
 }
