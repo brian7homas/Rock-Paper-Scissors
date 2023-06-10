@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import { Global, css } from '@emotion/react'
 import styled from "@emotion/styled"
@@ -13,8 +14,10 @@ const MainContainer = styled.main`
   background: radial-gradient(circle, rgba(31,55,86,1) 21%, rgba(29,47,80,1) 45%, rgba(20,21,57,1) 92%);
   height:100vh;
   justify-content:space-between;
+  overflow-y: scroll;
 `
 const IndexPage: React.FC<PageProps> = () => {
+  const [points, addPoints] = useState(0)
   return (
     <>
       <Global 
@@ -36,8 +39,12 @@ const IndexPage: React.FC<PageProps> = () => {
           `}
         />
         <MainContainer>
-          <Scoreboard/>
-          <Board/>
+          <Scoreboard
+            points={points}
+          />
+          <Board 
+            addPoints={addPoints}
+          />
           <Footer/>
         </MainContainer>
     </>

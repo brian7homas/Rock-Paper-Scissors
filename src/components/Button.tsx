@@ -1,5 +1,10 @@
 import React from "react";
+import gsap from 'gsap'
 import styled from "@emotion/styled";
+import { CustomEase } from "gsap/CustomEase";
+import StartRound from "../animations/StartRoung";
+gsap.registerPlugin(CustomEase);
+CustomEase.create("custom", "M0,0 C1.196,0.016 0.282,0.334 1,1 ");
 
 const Button = (props:any) => {
   const ButtonContainer = styled.div`
@@ -27,10 +32,32 @@ const ButtonInlay = styled.div`
   display:flex;
   justify-content: center;
   align-items:center;
+  cursor:pointer;
 `
+const round = async (name:string) => {
+  let buttons = gsap.utils.toArray(".btn")
+  let animateOut:any = []
+  
+  // find matching class/element
+  const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
+    
+    // find elements to animate out
+    if(item.classList[1] != `btn-container--${val}`){
+      animateOut.push(item)
+    }
+    
+    // matching class name sits in 2nd position of classList array/object
+    return item.classList[1] === `btn-container--${val}`
+  }).length;
+  findMatches(buttons, name)
+  StartRound(name, animateOut, props.color)
+}
   return(
-    <ButtonContainer>
-      <ButtonInlay>
+    <ButtonContainer className={`btn btn-container--${props.name}`}>
+      <ButtonInlay 
+        className={`btn-inlay--${props.name}`}
+        onClick={async () => await round(props.name)}
+        >
         {props.icon}
       </ButtonInlay>
     </ButtonContainer>
