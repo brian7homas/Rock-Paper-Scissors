@@ -36,8 +36,9 @@ const Opponent = styled.div`
 `
 const Board = (props) => {
   return(
-    <BoardContainer>
+    <BoardContainer className="board-container">
       <Pentagon 
+        className='pentagon'
         css={css`
             position:absolute;
             z-index:0;
