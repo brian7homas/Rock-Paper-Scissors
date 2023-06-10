@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 
+const breakpoints = [685]
+
+const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
+
 const ScoreboardContainer = styled.section`
-  margin: 5em calc((100% - 30em)/3);
-  padding: 1.5em 3em;
+  margin: 2em calc((100% - 30em)/3) 7em calc((100% - 30em)/3);
+  padding: 1.5em 1em;
   border: 2px solid white;
   border-radius: 20px;
   display:flex;

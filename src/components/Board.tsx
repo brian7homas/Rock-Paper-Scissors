@@ -5,10 +5,17 @@ import Button from './Button'
 import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 
+const breakpoints = [685]
+const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
+
 const BoardContainer = styled.section`
-  margin: -2em auto 0 auto;
+  margin: 8em auto 0 auto;
   position:relative;
   display: grid;
+  transform: scale(.95);
+  ${mqHeight[0]} {
+    margin: -6em auto 0 auto;
+  }
 `
 const Board = () => {
   return(
