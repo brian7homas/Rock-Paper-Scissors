@@ -37,7 +37,9 @@ let tl = gsap.timeline({paused: true})
     tl.play()
   }
   return(
+    <ButtonContainer className={`btn btn-container--${props.name}`}>
       <ButtonInlay 
+        className={`btn-inlay--${props.name}`}
         onClick={async () => await round(props.name)}
         >
         {props.icon}

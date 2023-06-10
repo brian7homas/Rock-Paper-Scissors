@@ -53,6 +53,7 @@ const Board = (props) => {
               shadow={item.shadow}
               icon={item.icon}
               position={item.position}
+              name={item.name}
               addPoints={props.addPoints}
             />
           )
