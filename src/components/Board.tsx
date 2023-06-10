@@ -45,9 +45,10 @@ const Board = (props) => {
             `}
       />
       {
-        Data.map((item) => {
+        Data.map((item, i) => {
           return(
             <Button
+              key={i}
               color={item.color}
               shadow={item.shadow}
               icon={item.icon}
