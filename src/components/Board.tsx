@@ -11,7 +11,7 @@ import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 import Rules from '../data/rules'
 // ANIMATION
-import StartRound from "../animations/StartRoung";
+import StartRound from "../animations/StartRound";
 // LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
 

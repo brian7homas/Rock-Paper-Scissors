@@ -14,6 +14,7 @@ const StartRound = (name:any, animateOut:any, color:any, onChange:any) => {
     .to(['.player-label','.house-label'], { display: 'block', onComplete:() => {
       onChange.player = name
     }})
+    .to('.restart-container', { display: 'block' })
   return tl.play()
 }
 
