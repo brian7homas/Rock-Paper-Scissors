@@ -20,45 +20,52 @@ const Button = (props:any) => {
   align-items:center;
   ${props.position};
 `
-const ButtonInlay = styled.div`
-  background:white;
-  border:none;
-  border-radius: 50% 50%;
-  height: 145px;
-  width: 145px;
-  position: absolute;
-  z-index:1;
-  box-shadow: ${props.shadow};
-  display:flex;
-  justify-content: center;
-  align-items:center;
-  cursor:pointer;
-`
-let changeName = {
-  player:'',
-  house:''
-}
+  const ButtonInlay = styled.div`
+    background:white;
+    border:none;
+    border-radius: 50% 50%;
+    height: 145px;
+    width: 145px;
+    position: absolute;
+    z-index:1;
+    box-shadow: ${props.shadow};
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    cursor:pointer;
+  `
+  let changeName = {
+    player:'',
+    house:''
+  }
 
-const startRound = async (name:string) => {
-  let buttons = gsap.utils.toArray(".btn")
-  let animateOut:any = []
-  
-  // find matching class/element
-  const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
+  const startRound = async (name:string) => {
+    let buttons = gsap.utils.toArray(".btn")
+    let animateOut:any = []
     
-    // find elements to animate out
-    if(item.classList[1] != `btn-container--${val}`){
-      animateOut.push(item)
+    // find matching class/element
+    const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
+      
+      // find elements to animate out
+      if(item.classList[1] != `btn-container--${val}`){
+        animateOut.push(item)
+      }
+      
+      // matching class name sits in 2nd position of classList array/object
+      return item.classList[1] === `btn-container--${val}`
+    }).length;
+    findMatches(buttons, name)
+    StartRound(name, animateOut, props.color, changeName).then(() => {
+      console.log(changeName.player)
+      Rules(changeName.player, )
+    })
+  }
+  const Rules = (player:string, house:string) => {
+    switch(player){
+      case 'scissors':
+        console.log('scissors beat')
     }
-    
-    // matching class name sits in 2nd position of classList array/object
-    return item.classList[1] === `btn-container--${val}`
-  }).length;
-  findMatches(buttons, name)
-  StartRound(name, animateOut, props.color, changeName).then(() => {
-    console.log(changeName.player)
-  })
-}
+  }
   return(
     <ButtonContainer className={`btn btn-container--${props.name}`}>
       <ButtonInlay 
