@@ -7,9 +7,12 @@ import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 const Opponent = lazy(() => import('../components/Opponent'))
 
+const Board = (props) => {
   const [load, setLoad] = useState(false);
+  const breakpoints = [685]
+  const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
 
-const BoardContainer = styled.section`
+  const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
   display: grid;
@@ -18,24 +21,27 @@ const BoardContainer = styled.section`
     margin: -6em auto 0 auto;
   }
 `
-const Opponent = styled.div`
-  background: white;
-  border:none;
-  border-radius: 50% 50%;
-  height: 175px;
-  width: 175px;
-  position: absolute;
-  z-index:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  left: 30px;
+  const PlayerLabel = styled.p`
   display:none;
-  opacity:0;
-  visibility:0;
-  z-index:4;
-`
-const Board = (props) => {
+  position:absolute;
+  z-index:5;
+  font-family: 'Barlow Semi Condensed';
+  color: white;
+  top: -4em;
+  left: .5em;
+  font-size: 2em;
+  font-weight: 700;
+  `
+  const HouseLabel = styled.p`
+  display:none;
+  position:absolute;
+  z-index:5;
+  font-family: 'Barlow Semi Condensed';
+  color: white;
+  top: -4em;
+  right: -1em;
+  font-size: 2em;
+  `
   return(
     <BoardContainer className="board-container">
       <Pentagon 
@@ -46,6 +52,9 @@ const Board = (props) => {
             place-self: center;
             `}
       />
+      <PlayerLabel className="player-label">
+        YOU PICKED
+      </PlayerLabel>
       {
         Data.map((item, i) => {
           return(
@@ -62,6 +71,9 @@ const Board = (props) => {
           )
         })
       }
+      <HouseLabel className="house-label">
+        THE HOUSE PICKED
+      </HouseLabel>
       {
         <Opponent/> || load
       }
