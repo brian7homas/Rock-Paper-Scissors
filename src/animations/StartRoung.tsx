@@ -8,7 +8,8 @@ const StartRound = (name:any, animateOut:any, color:any) => {
     .to(`.board-container`, 2,{ ease: 'custom',  width: '50vw', display:'flex', justifyContent: 'space-between' }, '+=.5')
     .to(`.btn-container--${name}`, { position: 'initial'}, '<')
     .fromTo(`.btn-container--${name}`, {background:'transparent'}, {ease:"slow(0.7, 0.7, false)", background:`${color}`}, '<=1.25')
-    .to('.opponent', { display: 'block', position: 'relative', visibility: 'visible', opacity: 1}, '<')
+    .to('.opponent-inlay', { display: 'flex', position: 'relative', visibility: 'visible', opacity: 1}, '<')
+    .to('.opponent-container', { transform: 'scale(1.5)', display: 'flex', position: 'relative', visibility: 'visible', opacity: 1}, '<')
   return tl.play()
 }
 
