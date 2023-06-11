@@ -56,8 +56,7 @@ const Button = (props:any) => {
     }).length;
     findMatches(buttons, name)
     StartRound(name, animateOut, props.color, changeName).then(() => {
-      console.log(changeName.player)
-      Rules(changeName.player, )
+      Rules(changeName.player, props.housePick)
     })
   }
   const Rules = (player:string, house:string) => {

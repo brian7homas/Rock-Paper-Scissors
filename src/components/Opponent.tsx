@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import Data from '../data/data'
 
 const Opponent = (props:any) => {
-  let icon, bg
   const OpponentContainer = styled.div`
   border:none;
   border-radius: 50% 50%;
@@ -35,21 +34,15 @@ const Opponent = (props:any) => {
   visibility:0;
   z-index:4;
 ` 
-  const OpponentIcon = () => {
-    const randIndex = Math.floor(Math.random() * Data.length)
-    icon = Data[randIndex].icon
-    bg = Data[randIndex].color
-  }
-  OpponentIcon()
   return(
     <OpponentContainer 
       className='opponent-container'
       style={{
-        'background':`${bg}`
+        'background':`${props.bg}`
       }}
       >
       <OpponentInlay className='opponent-inlay'>
-        {icon}
+        {props.icon}
       </OpponentInlay>
     </OpponentContainer>
   )

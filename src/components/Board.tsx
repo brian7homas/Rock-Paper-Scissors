@@ -11,7 +11,7 @@ const Board = (props) => {
   const [load, setLoad] = useState(false);
   const breakpoints = [685]
   const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
-
+  let icon: React.JSX.Element, bg: string, name:any
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
@@ -42,6 +42,13 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
+  const OpponentIcon = () => {
+    const randIndex = Math.floor(Math.random() * Data.length)
+    name = Data[randIndex].name
+    icon = Data[randIndex].icon
+    bg = Data[randIndex].color
+  }
+  OpponentIcon()
   return(
     <BoardContainer className="board-container">
       <Pentagon 
@@ -67,6 +74,9 @@ const Board = (props) => {
               name={item.name}
               addPoints={props.addPoints}
               opponent={Opponent}
+              houseBg={bg}
+              houseIcon={icon}
+              housePick={name}
             />
           )
         })
@@ -75,7 +85,10 @@ const Board = (props) => {
         THE HOUSE PICKED
       </HouseLabel>
       {
-        <Opponent/> || load
+        <Opponent
+          bg={bg}
+          icon={icon}
+        /> || load
       }
     </BoardContainer>
   )  
