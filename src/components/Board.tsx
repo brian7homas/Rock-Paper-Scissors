@@ -22,7 +22,7 @@ const Board = (props) => {
     house:''
   }
   let icon: React.JSX.Element, bg: string, name:any
-  const OpponentIcon = () => {
+  const OpponentData = () => {
     const randIndex = Math.floor(Math.random() * Data.length)
     name = Data[randIndex].name
     icon = Data[randIndex].icon
@@ -81,8 +81,8 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
-  
-  OpponentIcon()
+  // GET OPPONENT DATA
+  OpponentData()
   return(
     <BoardContainer className="board-container">
       <Pentagon 
