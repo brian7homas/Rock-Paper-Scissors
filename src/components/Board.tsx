@@ -1,12 +1,13 @@
 import React from "react";
+import { lazy, useState } from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
 import Button from './Button'
 import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
+const Opponent = lazy(() => import('../components/Opponent'))
 
-const breakpoints = [685]
-const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
+  const [load, setLoad] = useState(false);
 
 const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
@@ -56,11 +57,14 @@ const Board = (props) => {
               position={item.position}
               name={item.name}
               addPoints={props.addPoints}
+              opponent={Opponent}
             />
           )
         })
       }
-      <Opponent className='opponent'/>
+      {
+        <Opponent/> || load
+      }
     </BoardContainer>
   )  
 }
