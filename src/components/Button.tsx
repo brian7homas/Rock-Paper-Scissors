@@ -34,7 +34,12 @@ const ButtonInlay = styled.div`
   align-items:center;
   cursor:pointer;
 `
-const round = async (name:string) => {
+let changeName = {
+  player:'',
+  house:''
+}
+
+const startRound = async (name:string) => {
   let buttons = gsap.utils.toArray(".btn")
   let animateOut:any = []
   
@@ -50,13 +55,18 @@ const round = async (name:string) => {
     return item.classList[1] === `btn-container--${val}`
   }).length;
   findMatches(buttons, name)
-  StartRound(name, animateOut, props.color)
+  StartRound(name, animateOut, props.color, changeName).then(() => {
+    console.log(changeName.player)
+  })
 }
   return(
     <ButtonContainer className={`btn btn-container--${props.name}`}>
       <ButtonInlay 
         className={`btn-inlay--${props.name}`}
-        onClick={async () => await round(props.name)}
+        onClick={async () => {
+          props.opponent
+          return await startRound(props.name); 
+          }}
         >
         {props.icon}
       </ButtonInlay>
