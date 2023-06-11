@@ -2,16 +2,55 @@ import React from "react";
 import { lazy, useState } from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
+// COMPONENETS
 import Button from './Button'
+import Restart from "./Restart";
+// SVG
 import Pentagon from '../svg/bg-pentagon.svg'
+// DATA
 import Data from '../data/data'
+import Rules from '../data/rules'
+// ANIMATION
+import StartRound from "../animations/StartRoung";
+// LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
 
 const Board = (props) => {
   const [load, setLoad] = useState(false);
+  let changeName = {
+    player:'',
+    house:''
+  }
+  let icon: React.JSX.Element, bg: string, name:any
+  const OpponentIcon = () => {
+    const randIndex = Math.floor(Math.random() * Data.length)
+    name = Data[randIndex].name
+    icon = Data[randIndex].icon
+    bg = Data[randIndex].color
+  }
+  const startRound = async (name:string) => {
+    let buttons = gsap.utils.toArray(".btn")
+    let animateOut:any = []
+    
+    // find matching class/element
+    const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
+      
+      // find elements to animate out
+      if(item.classList[1] != `btn-container--${val}`){
+        animateOut.push(item)
+      }
+      
+      // matching class name sits in 2nd position of classList array/object
+      return item.classList[1] === `btn-container--${val}`
+    }).length;
+    findMatches(buttons, name)
+    StartRound(name, animateOut, props.color, changeName).then(() => {
+      Rules(changeName.player, props.housePick)
+    })
+  }
+  // STYLES
   const breakpoints = [685]
   const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
-  let icon: React.JSX.Element, bg: string, name:any
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
@@ -42,12 +81,7 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
-  const OpponentIcon = () => {
-    const randIndex = Math.floor(Math.random() * Data.length)
-    name = Data[randIndex].name
-    icon = Data[randIndex].icon
-    bg = Data[randIndex].color
-  }
+  
   OpponentIcon()
   return(
     <BoardContainer className="board-container">
@@ -77,6 +111,7 @@ const Board = (props) => {
               houseBg={bg}
               houseIcon={icon}
               housePick={name}
+              startRound={startRound}
             />
           )
         })
