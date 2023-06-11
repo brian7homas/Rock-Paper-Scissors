@@ -82,7 +82,7 @@ const Board = (props) => {
         })
       }
       <HouseLabel className="house-label">
-        THE HOUSE PICKED
+        HOUSE PICKED
       </HouseLabel>
       {
         <Opponent
