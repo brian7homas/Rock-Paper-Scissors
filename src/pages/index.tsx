@@ -8,8 +8,8 @@ import Layout from "../components/Layout"
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
-      <Global 
-          styles={css`
+      <Global
+        styles={css`
           @font-face {
             font-family: 'Barlow Semi Condensed';
             src: url('https://fonts.google.com/specimen/Barlow+Semi+Condensed') format('truetype');
@@ -25,9 +25,11 @@ const IndexPage: React.FC<PageProps> = () => {
             }
             
           `}
-        />
+      />
+      <Board />
+      <Footer />
     </Layout>
-    
+
   )
 }
 
