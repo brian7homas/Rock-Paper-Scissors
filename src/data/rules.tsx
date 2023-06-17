@@ -4,6 +4,27 @@ const Rules = async (player:string, score:any) => {
   score.house = Data[randIndex].name
   score.houseIcon = Data[randIndex].icon
   score.houseBg = Data[randIndex].color
+  score.player = player
+  const win = () => {
+    score.message = 'YOU WIN'
+    score.game = 1
+    score.playerPoints = score.playerPoints + 1
+    return score
+  }
+  const lose = () => {
+    score.message = 'YOU LOSE'
+    score.game = 0
+    // 0 is lowest score player can have
+    if(score.playerPoints > 0){
+      score.playerPoints = score.playerPoints - 1
+      return score
+    }
+  }
+  const draw = () => {
+    score.message = 'DRAW'
+    score.game = 2
+    return score
+  }
   switch(player){
     case 'scissors':
       if(house == 'spock') console.log('house: spock - HOUSE WINS')
