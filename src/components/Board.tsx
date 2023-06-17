@@ -1,17 +1,53 @@
-import React from "react";
-import { lazy, useState } from "react";
+import React, { useContext } from "react";
+import { lazy, useState, useRef } from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
+// STATE
+import { ScoreStateContext } from "./Layout";
+// COMPONENETS
 import Button from './Button'
+import UseIsClient from "./UseIsClient";
+// SVG
 import Pentagon from '../svg/bg-pentagon.svg'
+// DATA
 import Data from '../data/data'
+import Rules from '../data/rules'
+// ANIMATION
+import StartRound from "../animations/StartAnimation";
+import Scoreboard from "./Scoreboard";
+// LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
+const Restart = lazy(() => import('../components/Restart'))
 
 const Board = (props) => {
-  const [load, setLoad] = useState(false);
+  //? VARIABLES
+  const score = useContext(ScoreStateContext)
+  const [components, setComponents] = useState(["Restart", "Opponent"]);
+  let icon: React.JSX.Element, bg: string
   const breakpoints = [685]
   const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
-  let icon: React.JSX.Element, bg: string, name:any
+  const { isClient, key } = UseIsClient()
+  let houseData = useRef({ game: 0 })
+  //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
+  const loadRestart = async () => {
+    setComponents([...components, "Restart", "Opponent", "ScoreBoard"])
+  }
+  //? FUNCTIONS
+  const startRound = async (name: string, color: string) => {
+    Rules(name, score)
+    //? THROWS MINIFIED ERROR - SERVER AND CLIENT NOT MATCHING
+    await loadRestart().then(async () => {
+      //? START THE ANIMATION
+      await StartRound(name, color, score).timeScale(1.2)
+    })
+  }
+  /** 
+    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
+    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
+  */
+  if( !isClient ) return null
+    
+  //? STYLES
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
@@ -24,6 +60,8 @@ const Board = (props) => {
   const PlayerLabel = styled.p`
   display:none;
   position:absolute;
+  opacity:0;
+  visibiltiy:hidden;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
@@ -34,6 +72,8 @@ const Board = (props) => {
   `
   const HouseLabel = styled.p`
   display:none;
+  opacity:0;
+  visibiltiy:hidden;
   position:absolute;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
@@ -42,55 +82,52 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
-  const OpponentIcon = () => {
-    const randIndex = Math.floor(Math.random() * Data.length)
-    name = Data[randIndex].name
-    icon = Data[randIndex].icon
-    bg = Data[randIndex].color
-  }
-  OpponentIcon()
-  return(
-    <BoardContainer className="board-container">
-      <Pentagon 
-        className='pentagon'
-        css={css`
+  return (
+    <>
+      <Scoreboard
+        key={key}
+        points={houseData.game}
+      />
+      <BoardContainer className="board-container">
+        <Pentagon
+          className='pentagon'
+          css={css`
             position:absolute;
             z-index:0;
             place-self: center;
             `}
-      />
-      <PlayerLabel className="player-label">
-        YOU PICKED
-      </PlayerLabel>
-      {
-        Data.map((item, i) => {
-          return(
-            <Button
-              key={i}
-              color={item.color}
-              shadow={item.shadow}
-              icon={item.icon}
-              position={item.position}
-              name={item.name}
-              addPoints={props.addPoints}
-              opponent={Opponent}
-              houseBg={bg}
-              houseIcon={icon}
-              housePick={name}
-            />
-          )
-        })
-      }
-      <HouseLabel className="house-label">
-        HOUSE PICKED
-      </HouseLabel>
-      {
-        <Opponent
-          bg={bg}
-          icon={icon}
-        /> || load
-      }
-    </BoardContainer>
-  )  
+        />
+        <PlayerLabel className="player-label">
+          YOU PICKED
+        </PlayerLabel>
+        {
+          Data.map((item, i) => {
+            return (
+              <Button
+                key={i}
+                color={item.color}
+                shadow={item.shadow}
+                icon={item.icon}
+                position={item.position}
+                name={item.name}
+                houseBg={bg}
+                houseIcon={icon}
+                startRound={startRound}
+              />
+            )
+          })
+        }
+        <Restart changeName={score} addPoints={props.addPoints} />
+        <HouseLabel className="house-label">
+          HOUSE PICKED
+        </HouseLabel>
+        {<Opponent
+          bg={score.houseBg}
+          icon={score.houseIcon}
+        />}
+      </BoardContainer>
+
+    </>
+  )
 }
 export default Board
