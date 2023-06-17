@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { lazy, useState } from "react";
+import { lazy, useState, useRef } from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
 // STATE
@@ -13,7 +13,8 @@ import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 import Rules from '../data/rules'
 // ANIMATION
-import StartRound from "../animations/StartRound";
+import StartRound from "../animations/StartAnimation";
+import Scoreboard from "./Scoreboard";
 // LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
 const Restart = lazy(() => import('../components/Restart'))
@@ -46,25 +47,7 @@ const Board = (props) => {
   */
   if( !isClient ) return null
     
-    // find matching class/element
-    const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
-      
-      // find elements to animate out
-      if(item.classList[1] != `btn-container--${val}`){
-        animateOut.push(item)
-      }
-      
-      // matching class name sits in 2nd position of classList array/object
-      return item.classList[1] === `btn-container--${val}`
-    }).length;
-    findMatches(buttons, name)
-    StartRound(name, animateOut, props.color, changeName).then(() => {
-      Rules(changeName.player, props.housePick)
-    })
-  }
-  // STYLES
-  const breakpoints = [685]
-  const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
+  //? STYLES
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
