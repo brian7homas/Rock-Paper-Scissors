@@ -1,3 +1,7 @@
+import gsap from 'gsap'
+
+let tl = gsap.timeline({paused: true})
+const StartAnimation = (name:any, color:null, score:null) => {
   let buttons = gsap.utils.toArray(".btn")
   let animateOut:any = []
   const filterPick = async (arr:any, val:any) => arr.filter((item:any) => {
@@ -22,3 +26,7 @@
   .fromTo(['.player-label','.house-label'], { display: 'none', opacity:0, visibility:'hidden' }, { display: 'block',opacity:1, visibility:'visible' })
   .fromTo('.restart-container', { display: 'none', opacity: 0, visibility: 'hidden', autoAlpha:0 }, { autoAplha:1, display: 'flex', opacity: 1, visibility: 'visible' }, '<')
 tl.play()
+  return tl
+}
+
+export default StartAnimation
