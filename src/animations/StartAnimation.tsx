@@ -1,3 +1,13 @@
+  let buttons = gsap.utils.toArray(".btn")
+  let animateOut:any = []
+  const filterPick = async (arr:any, val:any) => arr.filter((item:any) => {
+    if(item.classList[1] != `btn-container--${val}`) animateOut.push(item)
+    item.classList[1] === `btn-container--${val}`
+    return animateOut
+  })
+  
+  filterPick(buttons,name)
+  
   tl
   .to(`.btn-container--${name}`, { transform: 'scale(1.5)',background: 'transparent' })
   .to([animateOut, '.pentagon'], { stagger: .2, duration: .15, opacity:0, display:'none' }, '<')
