@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import Data from '../data/data'
+import { ScoreStateContext } from "./Layout";
 
 const Opponent = (props:any) => {
+  const score = useContext(ScoreStateContext)
   const OpponentContainer = styled.div`
   border:none;
   border-radius: 50% 50%;
@@ -38,11 +39,11 @@ const Opponent = (props:any) => {
     <OpponentContainer 
       className='opponent-container'
       style={{
-        'background':`${props.bg}`
+        'background':`${score.houseBg}`
       }}
       >
       <OpponentInlay className='opponent-inlay'>
-        {props.icon}
+        {score.houseIcon}
       </OpponentInlay>
     </OpponentContainer>
   )

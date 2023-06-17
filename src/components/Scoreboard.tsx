@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
+import { ScoreStateContext } from "./Layout";
 
 const breakpoints = [685]
 
@@ -52,7 +53,8 @@ const ScoreNumber = styled.span`
   line-height:auto;
   letter-spacing: auto;
 `
-const Scoreboard = (props) => {
+const Scoreboard = () => {
+  const score = useContext(ScoreStateContext)
   return(
     <ScoreboardContainer>
       <CopyContainer>
@@ -65,7 +67,7 @@ const Scoreboard = (props) => {
       <ScoreContainer>
         <ScoreCopyContainer>
           <ScoreTitle>SCORE</ScoreTitle>
-          <ScoreNumber>{props.points}</ScoreNumber>
+          <ScoreNumber className="points">{score.playerPoints}</ScoreNumber>
         </ScoreCopyContainer>
       </ScoreContainer>
     </ScoreboardContainer>
