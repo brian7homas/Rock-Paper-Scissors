@@ -1,4 +1,5 @@
-const Rules = (player:string, house:string) => {
+import Data from './data'
+const Rules = async (player:string, score:any) => {
   switch(player){
     case 'scissors':
       if(house == 'spock') console.log('house: spock - HOUSE WINS')
