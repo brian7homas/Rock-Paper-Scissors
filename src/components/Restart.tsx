@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 // STATE
 import { ScoreStateContext } from "./Layout";
-import StartRound from "../animations/StartRound";
+import StartRound from "../animations/StartAnimation";
 
 const Restart = () => {
   //? VARIABLES
