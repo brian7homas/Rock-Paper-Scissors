@@ -19,9 +19,17 @@ const Opponent = lazy(() => import('../components/Opponent'))
 const Restart = lazy(() => import('../components/Restart'))
 
 const Board = (props) => {
+  //? VARIABLES
   const score = useContext(ScoreStateContext)
   const [components, setComponents] = useState(["Restart", "Opponent"]);
+  let icon: React.JSX.Element, bg: string
+  const breakpoints = [685]
+  const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
   const { isClient, key } = UseIsClient()
+  let houseData = useRef({ game: 0 })
+  //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
+  const loadRestart = async () => {
+    setComponents([...components, "Restart", "Opponent", "ScoreBoard"])
   }
   //? FUNCTIONS
   const startRound = async (name: string, color: string) => {
