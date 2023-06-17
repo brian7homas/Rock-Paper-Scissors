@@ -27,39 +27,39 @@ const Rules = async (player:string, score:any) => {
   }
   switch(player){
     case 'scissors':
-      if(house == 'spock') console.log('house: spock - HOUSE WINS')
-      if(house == 'lizard') console.log('house: lizard - YOU WIN')
-      if(house == 'rock') console.log('house: rock - HOUSE WINS')
-      if(house == 'paper') console.log('house: paper - YOU WIN')
-      if(house == 'scissors') console.log('house: scissors - DRAW')
+      if(score.house == 'spock') lose()
+      if(score.house == 'lizard') win()
+      if(score.house == 'rock') lose()
+      if(score.house == 'paper') win()
+      if(score.house == 'scissors') draw()
       break
     case 'paper':
-      if(house == 'spock') console.log('house: spock - YOU WIN')
-      if(house == 'lizard') console.log('house: lizard - HOUSE WINS')
-      if(house == 'rock') console.log('house: rock - YOU WIN')
-      if(house == 'paper') console.log('house: paper - DRAW')
-      if(house == 'scissors') console.log('house: scissors - HOUSE WINS')
+      if(score.house == 'spock') win()
+      if(score.house == 'lizard') lose()
+      if(score.house == 'rock') win()
+      if(score.house == 'paper') draw()
+      if(score.house == 'scissors') lose()
       break
     case 'rock':
-      if(house == 'spock') console.log('house: spock - HOUSE WINS')
-      if(house == 'lizard') console.log('house: lizard - YOU WIN')
-      if(house == 'rock') console.log('house: rock - DRAW')
-      if(house == 'paper') console.log('house: paper - HOUSE WINS')
-      if(house == 'scissors') console.log('house: scissors - YOU WIN')
+      if(score.house == 'spock') lose()
+      if(score.house == 'lizard') win()
+      if(score.house == 'rock') draw()
+      if(score.house == 'paper') lose()
+      if(score.house == 'scissors') win()
       break
     case 'lizard':
-      if(house == 'spock') console.log('house: spock - YOU WIN')
-      if(house == 'lizard') console.log('house: lizard - DRAW')
-      if(house == 'rock') console.log('house: rock - HOUSE WINS')
-      if(house == 'paper') console.log('house: paper - YOU WIN')
-      if(house == 'scissors') console.log('house: scissors - HOUSE WINS')
+      if(score.house == 'spock') win()
+      if(score.house == 'lizard') draw()
+      if(score.house == 'rock') lose()
+      if(score.house == 'paper') win()
+      if(score.house == 'scissors') lose()
       break
     case 'spock':
-      if(house == 'spock') console.log('house: spock - DRAW')
-      if(house == 'lizard') console.log('house: lizard - HOUSE WINS')
-      if(house == 'rock') console.log('house: rock - YOU WIN')
-      if(house == 'paper') console.log('house: paper - HOUSE WINS')
-      if(house == 'scissors') console.log('house: scissors - YOU WIN')
+      if(score.house == 'spock') draw()
+      if(score.house == 'lizard') lose()
+      if(score.house == 'rock') win()
+      if(score.house == 'paper') lose()
+      if(score.house == 'scissors') win()
       break
   }
 }
