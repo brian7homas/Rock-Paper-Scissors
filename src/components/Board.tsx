@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { css } from '@emotion/react'
 // COMPONENETS
 import Button from './Button'
-import Restart from "./Restart";
+import UseIsClient from "./UseIsClient";
 // SVG
 import Pentagon from '../svg/bg-pentagon.svg'
 // DATA
@@ -16,10 +16,7 @@ import StartRound from "../animations/StartRound";
 const Opponent = lazy(() => import('../components/Opponent'))
 
 const Board = (props) => {
-  const [load, setLoad] = useState(false);
-  let changeName = {
-    player:'',
-    house:''
+  const { isClient, key } = UseIsClient()
   }
   let icon: React.JSX.Element, bg: string, name:any
   const OpponentData = () => {
@@ -28,9 +25,11 @@ const Board = (props) => {
     icon = Data[randIndex].icon
     bg = Data[randIndex].color
   }
-  const startRound = async (name:string) => {
-    let buttons = gsap.utils.toArray(".btn")
-    let animateOut:any = []
+  /** 
+    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
+    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
+  */
+  if( !isClient ) return null
     
     // find matching class/element
     const findMatches = (arr:any, val:any) => arr.filter((item:any, i:number) => {
