@@ -35,17 +35,8 @@ const Button = (props:any) => {
     cursor:pointer;
   `
   return(
-    <ButtonContainer className={`btn btn-container--${props.name}`}>
-      <ButtonInlay 
-        className={`btn-inlay--${props.name}`}
-        onClick={async () => {
-          props.opponent
-          return await props.startRound(props.name); 
-          }}
-        >
-        {props.icon}
-      </ButtonInlay>
-    </ButtonContainer>
+            gsap.to('.points', .04,{transform:'scale(0)'})
+              gsap.to('.points', .4,{transform:'scale(1)'})
   )
 }
 
