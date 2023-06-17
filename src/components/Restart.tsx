@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
+// STATE
+import { ScoreStateContext } from "./Layout";
+import StartRound from "../animations/StartRound";
 
 const Restart = () => {
+  //? VARIABLES
+  const score = useContext(ScoreStateContext)
   //? STYLES
   const RestartContainer = styled.div`
     display:none;
@@ -31,9 +36,13 @@ const Restart = () => {
   return (
     <RestartContainer className="restart-container">
       <RestartMessage>
+        {score.message}
       </RestartMessage>
       <RestartButton
         onClick={() => {
+          StartRound(score.player).timeScale(2.5).tweenTo(0).then(() => {
+            StartRound(score.player).clear()
+          })
         }}
       >
         PLAY AGAIN
