@@ -1,5 +1,9 @@
 import Data from './data'
 const Rules = async (player:string, score:any) => {
+  const randIndex = Math.floor(Math.random() * Data.length)
+  score.house = Data[randIndex].name
+  score.houseIcon = Data[randIndex].icon
+  score.houseBg = Data[randIndex].color
   switch(player){
     case 'scissors':
       if(house == 'spock') console.log('house: spock - HOUSE WINS')
