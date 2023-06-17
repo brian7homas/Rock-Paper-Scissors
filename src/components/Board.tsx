@@ -85,17 +85,52 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
-  // GET OPPONENT DATA
-  OpponentData()
-  return(
-    <BoardContainer className="board-container">
-      <Pentagon 
-        className='pentagon'
-        css={css`
+  return (
+    <>
+      <Scoreboard
+        key={key}
+        points={houseData.game}
+      />
+      <BoardContainer className="board-container">
+        <Pentagon
+          className='pentagon'
+          css={css`
             position:absolute;
             z-index:0;
             place-self: center;
             `}
-            <Restart changeName={score} addPoints={props.addPoints} />
+        />
+        <PlayerLabel className="player-label">
+          YOU PICKED
+        </PlayerLabel>
+        {
+          Data.map((item, i) => {
+            return (
+              <Button
+                key={i}
+                color={item.color}
+                shadow={item.shadow}
+                icon={item.icon}
+                position={item.position}
+                name={item.name}
+                houseBg={bg}
+                houseIcon={icon}
+                startRound={startRound}
+              />
+            )
+          })
+        }
+        <Restart changeName={score} addPoints={props.addPoints} />
+        <HouseLabel className="house-label">
+          HOUSE PICKED
+        </HouseLabel>
+        {<Opponent
+          bg={score.houseBg}
+          icon={score.houseIcon}
+        />}
+      </BoardContainer>
+
+    </>
+  )
 }
 export default Board
