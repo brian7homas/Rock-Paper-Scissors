@@ -16,9 +16,11 @@ import Rules from '../data/rules'
 import StartRound from "../animations/StartRound";
 // LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
+const Restart = lazy(() => import('../components/Restart'))
 
 const Board = (props) => {
   const score = useContext(ScoreStateContext)
+  const [components, setComponents] = useState(["Restart", "Opponent"]);
   const { isClient, key } = UseIsClient()
   }
   let icon: React.JSX.Element, bg: string, name:any
@@ -94,40 +96,6 @@ const Board = (props) => {
             z-index:0;
             place-self: center;
             `}
-      />
-      <PlayerLabel className="player-label">
-        YOU PICKED
-      </PlayerLabel>
-      {
-        Data.map((item, i) => {
-          return(
-            <Button
-              key={i}
-              color={item.color}
-              shadow={item.shadow}
-              icon={item.icon}
-              position={item.position}
-              name={item.name}
-              addPoints={props.addPoints}
-              opponent={Opponent}
-              houseBg={bg}
-              houseIcon={icon}
-              housePick={name}
-              startRound={startRound}
-            />
-          )
-        })
-      }
-      <HouseLabel className="house-label">
-        HOUSE PICKED
-      </HouseLabel>
-      {
-        <Opponent
-          bg={bg}
-          icon={icon}
-        /> || load
-      }
-    </BoardContainer>
-  )  
+            <Restart changeName={score} addPoints={props.addPoints} />
 }
 export default Board
