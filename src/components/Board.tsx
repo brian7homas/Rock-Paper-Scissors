@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { lazy, useState } from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
+// STATE
+import { ScoreStateContext } from "./Layout";
 // COMPONENETS
 import Button from './Button'
 import UseIsClient from "./UseIsClient";
@@ -16,6 +18,7 @@ import StartRound from "../animations/StartRound";
 const Opponent = lazy(() => import('../components/Opponent'))
 
 const Board = (props) => {
+  const score = useContext(ScoreStateContext)
   const { isClient, key } = UseIsClient()
   }
   let icon: React.JSX.Element, bg: string, name:any
