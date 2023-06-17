@@ -23,12 +23,14 @@ const Board = (props) => {
   const [components, setComponents] = useState(["Restart", "Opponent"]);
   const { isClient, key } = UseIsClient()
   }
-  let icon: React.JSX.Element, bg: string, name:any
-  const OpponentData = () => {
-    const randIndex = Math.floor(Math.random() * Data.length)
-    name = Data[randIndex].name
-    icon = Data[randIndex].icon
-    bg = Data[randIndex].color
+  //? FUNCTIONS
+  const startRound = async (name: string, color: string) => {
+    Rules(name, score)
+    //? THROWS MINIFIED ERROR - SERVER AND CLIENT NOT MATCHING
+    await loadRestart().then(async () => {
+      //? START THE ANIMATION
+      await StartRound(name, color, score).timeScale(1.2)
+    })
   }
   /** 
     //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
