@@ -60,6 +60,8 @@ const Board = (props) => {
   const PlayerLabel = styled.p`
   display:none;
   position:absolute;
+  opacity:0;
+  visibiltiy:hidden;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
@@ -70,6 +72,8 @@ const Board = (props) => {
   `
   const HouseLabel = styled.p`
   display:none;
+  opacity:0;
+  visibiltiy:hidden;
   position:absolute;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
