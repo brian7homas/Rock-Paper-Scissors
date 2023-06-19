@@ -4,7 +4,7 @@ import { ScoreStateContext } from "./Layout";
 
 const breakpoints = [685]
 
-const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
+const mq = breakpoints.map(bp => `@media (max-width: ${bp}px)`)
 
 const ScoreboardContainer = styled.section`
   margin: 2em calc((100% - 30em)/3) 7em calc((100% - 30em)/3);
@@ -16,6 +16,10 @@ const ScoreboardContainer = styled.section`
   justify-content: space-between;
   line-height:1.5em;
   letter-spacing: .02em;
+  ${mq[0]} {
+    margin: 2em calc((100% - 20em)/3) 7em calc((100% - 20em)/3);
+  }
+  
 `
 const CopyContainer = styled.section`
   font-family: 'Fjalla One';
