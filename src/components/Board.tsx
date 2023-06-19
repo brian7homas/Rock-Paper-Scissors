@@ -98,6 +98,18 @@ const Board = () => {
   right: -1em;
   font-size: 2em;
   `
+  const IconContainer = styled.div`
+    display:flex;
+    justify-content: space-between;
+    width:110%;
+    ${mqWidth[2]} {
+      width: 140%;
+      transform: scale(.8);
+    }
+    ${mqWidthPortrait[0]}{
+      transform: scale(.7);
+    }
+  `
   return (
     <>
       {
@@ -117,12 +129,14 @@ const Board = () => {
             }
             `}
         />
-        <PlayerLabel className="player-label">
-          YOU PICKED
-        </PlayerLabel>
-        {
-          Data.map((item, i) => {
-            return (
+        
+        <IconContainer>
+
+            <PlayerLabel className="player-label">
+              YOU PICKED
+            </PlayerLabel>
+            {
+            Data.map((item, i) => (
               <Button
                 key={i}
                 color={item.color}
@@ -132,19 +146,21 @@ const Board = () => {
                 name={item.name}
                 houseBg={bg}
                 houseIcon={icon}
-                startRound={startRound}
-              />
-            )
-          })
-        }
-        <Restart changeName={score} addPoints={props.addPoints} />
-        <HouseLabel className="house-label">
-          HOUSE PICKED
-        </HouseLabel>
-        {<Opponent
-          bg={score.houseBg}
-          icon={score.houseIcon}
-        />}
+                startRound={startRound} />
+            ))
+          }
+
+          <div>
+            <HouseLabel className="house-label">
+              HOUSE PICKED
+            </HouseLabel>
+            {<Opponent
+              bg={score.houseBg}
+              icon={score.houseIcon}
+            />}
+          </div>
+          
+        </IconContainer>
       </BoardContainer>
 
     </>
