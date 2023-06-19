@@ -19,13 +19,18 @@ import Scoreboard from "./Scoreboard";
 const Opponent = lazy(() => import('../components/Opponent'))
 const Restart = lazy(() => import('../components/Restart'))
 
-const Board = (props) => {
+const Board = () => {
   //? VARIABLES
   const score = useContext(ScoreStateContext)
   const [components, setComponents] = useState(["Restart", "Opponent"]);
   let icon: React.JSX.Element, bg: string
-  const breakpoints = [685]
+  const breakpoints = [490, 560, 685, 1024]
+  const mobileBP = [375]
+  //? MEDIA QUERIES
   const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
+  const mqWidth = breakpoints.map(bp => `@media screen and (max-width: ${bp}px)`)
+  const mqWidthLandscape = breakpoints.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: landscape)`)
+  const mqWidthPortrait = mobileBP.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: portrait)`)
   const { isClient, key } = UseIsClient()
   let houseData = useRef({ game: 0 })
   //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
@@ -53,8 +58,19 @@ const Board = (props) => {
   position:relative;
   display: grid;
   transform: scale(.95);
-  ${mqHeight[0]} {
+  max-width: 65vw;
+  ${mqHeight[2]} {
     margin: -6em auto 0 auto;
+  }
+  ${mqWidth[1]} {
+    transform: scale(.8);
+  }
+  ${mqWidth[0]} {
+    transform: scale(.76);
+    max-width: 100vw;
+  }
+  ${mqWidthLandscape[3]}{
+    margin-top: 17em;
   }
 `
   const PlayerLabel = styled.p`
@@ -96,6 +112,9 @@ const Board = (props) => {
             position:absolute;
             z-index:0;
             place-self: center;
+            ${mqWidthPortrait[0]}{
+              transform: scale(.7);
+            }
             `}
         />
         <PlayerLabel className="player-label">
