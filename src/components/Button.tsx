@@ -33,8 +33,22 @@ const Button = (props:any) => {
     align-items:center;
     cursor:pointer;
   `
+  const ButtonOverlay = styled.div`
+    background:transparent;
+    border:none;
+    border-radius: 50% 50%;
+    height: 145px;
+    width: 145px;
+    position: absolute;
+    z-index:0;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    cursor:pointer;
+  `
   return(
       <ButtonContainer className={`btn btn-container--${props.name}`}>
+        <ButtonOverlay className={`btn-overlay--${props.name}`}/>
         <ButtonInlay 
           className={`btn-inlay--${props.name}`}
           onClick={async () => {
