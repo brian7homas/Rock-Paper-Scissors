@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 // STATE
 import { ScoreStateContext } from "./Layout";
 import StartRound from "../animations/StartAnimation";
-
+const breakpoints = [973]
+const mq = breakpoints.map(bp => `@media (max-width: ${bp}px)`)
 const Restart = () => {
   //? VARIABLES
   const score = useContext(ScoreStateContext)
@@ -13,6 +14,12 @@ const Restart = () => {
     opacity:0;
     visibility: hidden;
     flex-direction:column;
+    position:relative;
+    z-index: 5;
+    top:-15em;
+    ${mq[0]} {
+      top:4em;
+    }
     
   `
   const RestartMessage = styled.h1`
@@ -25,12 +32,14 @@ const Restart = () => {
   `
   const RestartButton = styled.button`
     background-color: white;
-    padding: 1em 3em;
+    padding: 1em 2em;
     font-family: font-family: 'Barlow Semi Condensed';
     font-weight: 600;
     border-radius: 10px;
     font-size: 1.2rem;
     cursor: pointer;
+    width:12em;
+    margin:0 auto;
   `
   
   return (

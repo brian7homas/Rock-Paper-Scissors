@@ -19,42 +19,51 @@ import Scoreboard from "./Scoreboard";
 const Opponent = lazy(() => import('../components/Opponent'))
 const Restart = lazy(() => import('../components/Restart'))
 
-const Board = (props) => {
+const Board = () => {
   //? VARIABLES
   const score = useContext(ScoreStateContext)
   const [components, setComponents] = useState(["Restart", "Opponent"]);
   let icon: React.JSX.Element, bg: string
-  const breakpoints = [685]
+  const breakpoints = [490, 560, 685, 1024]
+  const mobileBP = [375]
+  //? MEDIA QUERIES
   const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
+  const mqWidth = breakpoints.map(bp => `@media screen and (max-width: ${bp}px)`)
+  const mqWidthLandscape = breakpoints.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: landscape)`)
+  const mqWidthPortrait = mobileBP.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: portrait)`)
   const { isClient, key } = UseIsClient()
   let houseData = useRef({ game: 0 })
   //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
   const loadRestart = async () => {
-    setComponents([...components, "Restart", "Opponent", "ScoreBoard"])
+    setComponents([...components, "ScoreBoard"])
   }
   //? FUNCTIONS
-  const startRound = async (name: string, color: string) => {
+  const startRound = async (name: string, color: string): Promise<void> => {
     Rules(name, score)
-    //? THROWS MINIFIED ERROR - SERVER AND CLIENT NOT MATCHING
     await loadRestart().then(async () => {
       //? START THE ANIMATION
-      await StartRound(name, color, score).timeScale(1.2)
+      await StartRound(name, color).timeScale(1.2)
     })
   }
-  /** 
-    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
-    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
-  */
-  if( !isClient ) return null
-    
   //? STYLES
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
   position:relative;
   display: grid;
   transform: scale(.95);
-  ${mqHeight[0]} {
+  max-width: 65vw;
+  ${mqHeight[2]} {
     margin: -6em auto 0 auto;
+  }
+  ${mqWidth[1]} {
+    transform: scale(.8);
+  }
+  ${mqWidth[0]} {
+    transform: scale(.76);
+    max-width: 100vw;
+  }
+  ${mqWidthLandscape[3]}{
+    margin-top: 17em;
   }
 `
   const PlayerLabel = styled.p`
@@ -82,12 +91,31 @@ const Board = (props) => {
   right: -1em;
   font-size: 2em;
   `
+  const IconContainer = styled.div`
+    display:flex;
+    justify-content: space-between;
+    width:110%;
+    ${mqWidth[2]} {
+      width: 140%;
+      transform: scale(.8);
+    }
+    ${mqWidthPortrait[0]}{
+      transform: scale(.7);
+    }
+  `
+  
+  /** 
+    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
+    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
+  */
+  if (!isClient) return false
   return (
     <>
-      <Scoreboard
-        key={key}
-        points={houseData.game}
-      />
+      {
+        components.map((item, i) => (
+          i < 1 ? <Scoreboard key={key+ '-' + i} points={houseData.game} /> : ''
+        ))
+      }
       <BoardContainer className="board-container">
         <Pentagon
           className='pentagon'
@@ -95,14 +123,19 @@ const Board = (props) => {
             position:absolute;
             z-index:0;
             place-self: center;
+            ${mqWidthPortrait[0]}{
+              transform: scale(.7);
+            }
             `}
         />
-        <PlayerLabel className="player-label">
-          YOU PICKED
-        </PlayerLabel>
-        {
-          Data.map((item, i) => {
-            return (
+        
+        <IconContainer>
+
+            <PlayerLabel className="player-label">
+              YOU PICKED
+            </PlayerLabel>
+            {
+            Data.map((item, i) => (
               <Button
                 key={i}
                 color={item.color}
@@ -112,22 +145,28 @@ const Board = (props) => {
                 name={item.name}
                 houseBg={bg}
                 houseIcon={icon}
-                startRound={startRound}
-              />
-            )
-          })
-        }
-        <Restart changeName={score} addPoints={props.addPoints} />
-        <HouseLabel className="house-label">
-          HOUSE PICKED
-        </HouseLabel>
-        {<Opponent
-          bg={score.houseBg}
-          icon={score.houseIcon}
-        />}
+                startRound={startRound} />
+            ))
+          }
+
+          <div>
+            <HouseLabel className="house-label">
+              HOUSE PICKED
+            </HouseLabel>
+            {<Opponent
+              bg={score.houseBg}
+              icon={score.houseIcon}
+            />}
+          </div>
+          
+        </IconContainer>
+        {RestartComponent()}
       </BoardContainer>
 
     </>
   )
+  function RestartComponent() {
+    return <Restart changeName={score} />;
+  }
 }
 export default Board

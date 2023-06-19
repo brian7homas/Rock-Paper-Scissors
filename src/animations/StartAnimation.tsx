@@ -1,9 +1,21 @@
 import gsap from 'gsap'
 
 let tl = gsap.timeline({paused: true})
-const StartAnimation = (name:any, color:null, score:null) => {
+const StartAnimation = (name:any, color:null) => {
   let buttons = gsap.utils.toArray(".btn")
   let animateOut:any = []
+  let boardContainerWidth = window.screen.width
+  let width
+  
+  if(boardContainerWidth > 709){
+    width = '90%'
+  }
+  if(boardContainerWidth > 1020){
+    width = '50vw'
+  }
+  if(boardContainerWidth <= 709){
+    width = '100vw'
+  }
   const filterPick = async (arr:any, val:any) => arr.filter((item:any) => {
     if(item.classList[1] != `btn-container--${val}`) animateOut.push(item)
     item.classList[1] === `btn-container--${val}`
@@ -14,9 +26,18 @@ const StartAnimation = (name:any, color:null, score:null) => {
   
   tl
   .to(`.btn-container--${name}`, { transform: 'scale(1.5)',background: 'transparent' })
+  .to(`.btn-overlay--${name}`, { zIndex:2 })
   .to([animateOut, '.pentagon'], { stagger: .2, duration: .15, opacity:0, display:'none' }, '<')
   // Delay
-  .to(`.board-container`, 2,{ ease: 'custom',  width: '50vw', display:'flex', justifyContent: 'space-between' }, '+=.5')
+  .to(`.board-container`, 2,{ 
+                            marginTop: '0', 
+                            height: '10vh', 
+                            ease: 'custom', 
+                            width: width,  
+                            display:'flex', 
+                            justifyContent: 'space-between', 
+                            alignItems:'center',
+                            flexDirection:'column' }, '+=.5')
   // PLACES PLAYER SELECTION IN MIDDLE OF SCREEN
   .to(`.btn-container--${name}`, { position: 'initial'}, '<')
   // CURRENT
