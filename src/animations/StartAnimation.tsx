@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
 let tl = gsap.timeline({paused: true})
-const StartAnimation = (name:any, color:null, score:null) => {
+const StartAnimation = (name:any, color:null) => {
   let buttons = gsap.utils.toArray(".btn")
   let animateOut:any = []
   let boardContainerWidth = window.screen.width
@@ -29,7 +29,15 @@ const StartAnimation = (name:any, color:null, score:null) => {
   .to(`.btn-overlay--${name}`, { zIndex:2 })
   .to([animateOut, '.pentagon'], { stagger: .2, duration: .15, opacity:0, display:'none' }, '<')
   // Delay
+  .to(`.board-container`, 2,{ 
+                            marginTop: '0', 
+                            height: '10vh', 
+                            ease: 'custom', 
                             width: width,  
+                            display:'flex', 
+                            justifyContent: 'space-between', 
+                            alignItems:'center',
+                            flexDirection:'column' }, '+=.5')
   // PLACES PLAYER SELECTION IN MIDDLE OF SCREEN
   .to(`.btn-container--${name}`, { position: 'initial'}, '<')
   // CURRENT

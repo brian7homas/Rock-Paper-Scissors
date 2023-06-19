@@ -42,7 +42,7 @@ const Board = () => {
     Rules(name, score)
     await loadRestart().then(async () => {
       //? START THE ANIMATION
-      await StartRound(name, color, score).timeScale(1.2)
+      await StartRound(name, color).timeScale(1.2)
     })
   }
   //? STYLES
