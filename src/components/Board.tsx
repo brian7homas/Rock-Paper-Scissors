@@ -38,20 +38,13 @@ const Board = () => {
     setComponents([...components, "ScoreBoard"])
   }
   //? FUNCTIONS
-  const startRound = async (name: string, color: string) => {
+  const startRound = async (name: string, color: string): Promise<void> => {
     Rules(name, score)
-    //? THROWS MINIFIED ERROR - SERVER AND CLIENT NOT MATCHING
     await loadRestart().then(async () => {
       //? START THE ANIMATION
       await StartRound(name, color, score).timeScale(1.2)
     })
   }
-  /** 
-    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
-    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
-  */
-  if( !isClient ) return null
-    
   //? STYLES
   const BoardContainer = styled.section`
   margin: 8em auto 0 auto;
@@ -110,6 +103,12 @@ const Board = () => {
       transform: scale(.7);
     }
   `
+  
+  /** 
+    //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
+    //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
+  */
+  if (!isClient) return false
   return (
     <>
       {
