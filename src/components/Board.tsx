@@ -161,9 +161,13 @@ const Board = () => {
           </div>
           
         </IconContainer>
+        {RestartComponent()}
       </BoardContainer>
 
     </>
   )
+  function RestartComponent() {
+    return <Restart changeName={score} />;
+  }
 }
 export default Board
