@@ -30,7 +30,7 @@ const Board = (props) => {
   let houseData = useRef({ game: 0 })
   //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
   const loadRestart = async () => {
-    setComponents([...components, "Restart", "Opponent", "ScoreBoard"])
+    setComponents([...components, "ScoreBoard"])
   }
   //? FUNCTIONS
   const startRound = async (name: string, color: string) => {
@@ -84,10 +84,11 @@ const Board = (props) => {
   `
   return (
     <>
-      <Scoreboard
-        key={key}
-        points={houseData.game}
-      />
+      {
+        components.map((item, i) => (
+          i < 1 ? <Scoreboard key={key+ '-' + i} points={houseData.game} /> : ''
+        ))
+      }
       <BoardContainer className="board-container">
         <Pentagon
           className='pentagon'
