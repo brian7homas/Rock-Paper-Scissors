@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { gsap } from "gsap";
 import styled from "@emotion/styled";
 // STATE
 import { ScoreStateContext } from "./Layout";
@@ -49,7 +50,8 @@ const Restart = () => {
       </RestartMessage>
       <RestartButton
         onClick={() => {
-          StartRound(score.player).timeScale(2.5).tweenTo(0).then(() => {
+          gsap.to('.underlay', .15, {stagger:.02, display:'none', opacity:0, visbility:'hidden', transform:'scale(0)'})
+          StartRound(score.player,'', score).timeScale(2.5).tweenTo(0).then(() => {
             StartRound(score.player).clear()
           })
         }}
