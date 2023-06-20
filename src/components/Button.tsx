@@ -47,7 +47,22 @@ const Button = (props:any) => {
     align-items:center;
     cursor:pointer;
   `
+  return (
+    <ButtonContainer className={`btn btn-container--${props.name}`}>
       <WinnerUnderlay player="player" />
+      <ButtonOverlay className={`btn-overlay--${props.name}`} />
+      <ButtonInlay
+        className={`btn-inlay--${props.name}`}
+        onClick={async () => {
+          gsap.to('.points', .04, { transform: 'scale(0)' })
+          await props.startRound(props.name, props.color).then(() => {
+            gsap.to('.points', .4, { transform: 'scale(1)' })
+          })
+        }}
+      >
+        {props.icon}
+      </ButtonInlay>
+    </ButtonContainer>
   )
 }
 
