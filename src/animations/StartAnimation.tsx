@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
 let tl = gsap.timeline({paused: true})
-const StartAnimation = (name:any, color:null) => {
+const StartAnimation = (name:any, color:null, score) => {
   let buttons = gsap.utils.toArray(".btn")
   let animateOut:any = []
   let boardContainerWidth = window.screen.width
@@ -45,7 +45,31 @@ const StartAnimation = (name:any, color:null) => {
   .to('.opponent-inlay', { display: 'flex', position: 'relative', visibility: 'visible', opacity: 1}, '<')
   .to('.opponent-container', { transform: 'scale(1.5)', display: 'flex', position: 'relative', visibility: 'visible', opacity: 1 }, '<')
   .fromTo(['.player-label','.house-label'], { display: 'none', opacity:0, visibility:'hidden' }, { display: 'block',opacity:1, visibility:'visible' })
-  .fromTo('.restart-container', { display: 'none', opacity: 0, visibility: 'hidden', autoAlpha:0 }, { autoAplha:1, display: 'flex', opacity: 1, visibility: 'visible' }, '<')
+  .fromTo('.restart-container', { display: 'none', opacity: 0, visibility: 'hidden', autoAlpha:0 }, { autoAplha:1, display: 'flex', opacity: 1, visibility: 'visible', onComplete: () => {
+    let els:any = []
+    if(score.game == 0){
+      els = gsap.utils.toArray('.house-underlay-1, .house-underlay-2, .house-underlay-3')
+      }
+    if(score.game == 1){
+      els = gsap.utils.toArray('.player-underlay-1, .player-underlay-2, .player-underlay-3')
+      }
+    gsap.fromTo(els,.75,
+    {
+      ease:'back.in(2.7)',
+      transform:'scale(0)',
+      opacity:0,
+      visibility:'hidden',
+      display:'none'
+    },
+    {
+      stagger:.099,
+      ease:'back.out(2.7)',
+      transform:'scale(1)',
+      opacity:1,
+      visibility:'visible',
+      display:'flex'
+    })
+  } })
 tl.play()
   return tl
 }

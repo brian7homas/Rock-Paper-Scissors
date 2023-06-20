@@ -29,6 +29,7 @@ const Footer = () => {
       <RulesButton>
         RULES
       </RulesButton>
+          <RulesCloseButton onClick={() => RulesAnimation()}>X</RulesCloseButton>
     </FooterEl>
   )
 }

@@ -13,7 +13,7 @@ import Pentagon from '../svg/bg-pentagon.svg'
 import Data from '../data/data'
 import Rules from '../data/rules'
 // ANIMATION
-import StartRound from "../animations/StartAnimation";
+import StartAnimation from "../animations/StartAnimation";
 import Scoreboard from "./Scoreboard";
 // LAZY
 const Opponent = lazy(() => import('../components/Opponent'))
@@ -42,7 +42,7 @@ const Board = () => {
     Rules(name, score)
     await loadRestart().then(async () => {
       //? START THE ANIMATION
-      await StartRound(name, color).timeScale(1.2)
+      await StartAnimation(name, color, score).timeScale(1.2)
     })
   }
   //? STYLES
