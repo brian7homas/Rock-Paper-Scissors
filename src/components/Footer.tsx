@@ -26,6 +26,9 @@ const RulesButton = styled.button`
   font-weight: 600;
   border-radius: 10px;
   letter-spacing: .09em;
+  z-index:0;
+  cursor:pointer;
+`
 const RulesOverlay = styled.div`
   background: hsla(0, 0%, 2%, 0.68);
   height:100vh;
@@ -89,8 +92,8 @@ const RulesTitle = styled.p`
 `
 const Footer = () => {
   return(
-    <FooterEl>
-      <RulesButton>
+    <FooterEl className="footer">
+      <RulesButton onClick={() => RulesAnimation()}>
         RULES
       </RulesButton>
       <RulesOverlay className="rules-overlay">

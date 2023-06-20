@@ -30,14 +30,15 @@ const StartAnimation = (name:any, color:null, score) => {
   .to([animateOut, '.pentagon'], { stagger: .2, duration: .15, opacity:0, display:'none' }, '<')
   // Delay
   .to(`.board-container`, 2,{ 
-                            marginTop: '0', 
-                            height: '10vh', 
+                            marginTop: '10em', 
+                            height: '50vh', 
                             ease: 'custom', 
                             width: width,  
                             display:'flex', 
-                            justifyContent: 'space-between', 
+                            justifyContent: 'flex-start', 
                             alignItems:'center',
                             flexDirection:'column' }, '+=.5')
+  .to('.footer', {marginTop: '0'}, '<')
   // PLACES PLAYER SELECTION IN MIDDLE OF SCREEN
   .to(`.btn-container--${name}`, { position: 'initial'}, '<')
   // CURRENT
