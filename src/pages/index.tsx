@@ -14,8 +14,16 @@ const IndexPage: React.FC<PageProps> = () => {
               box-sizing:border-box;
               margin:0;
               padding:0;
+              -ms-overflow-style: none;  /* Internet Explorer 10+ */
+              scrollbar-width: none;  /* Firefox */
             }
-            
+            *::-webkit-scrollbar { 
+              display: none;  /* Safari and Chrome */
+            }
+            html{
+              font-size:62.5%;
+              overflow:hidden;
+            }
           `}
       />
       <Board />

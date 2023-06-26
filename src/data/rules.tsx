@@ -9,6 +9,7 @@ const Rules = async (player:string, score:any) => {
     score.message = 'YOU WIN'
     score.game = 1
     score.playerPoints = score.playerPoints + 1
+    localStorage.setItem('player', score.playerPoints)
     return score
   }
   const lose = () => {
@@ -17,6 +18,7 @@ const Rules = async (player:string, score:any) => {
     // 0 is lowest score player can have
     if(score.playerPoints > 0){
       score.playerPoints = score.playerPoints - 1
+      localStorage.setItem('player', score.playerPoints)
       return score
     }
   }

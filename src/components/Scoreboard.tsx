@@ -4,7 +4,7 @@ import { ScoreStateContext } from "./Layout";
 
 const breakpoints = [685]
 
-const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
+const mq = breakpoints.map(bp => `@media (max-width: ${bp}px)`)
 
 const ScoreboardContainer = styled.section`
   margin: 2em calc((100% - 30em)/3) 7em calc((100% - 30em)/3);
@@ -16,10 +16,14 @@ const ScoreboardContainer = styled.section`
   justify-content: space-between;
   line-height:1.5em;
   letter-spacing: .02em;
+  ${mq[0]} {
+    margin: 2em calc((100% - 20em)/3) 7em calc((100% - 20em)/3);
+  }
+  
 `
 const CopyContainer = styled.section`
   font-family: 'Fjalla One';
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color:white;
 `
@@ -44,12 +48,12 @@ const ScoreCopyContainer = styled.div`
   line-height:initial;
 `
 const ScoreTitle = styled.p`
-  font-size: 1rem;
-  letter-spacing: .075em;
+  font-size: 1.4rem;
+  letter-spacing: .075rem;
 `
 const ScoreNumber = styled.span`
   font-family: 'Fjalla One';
-  font-size: 2.5rem;
+  font-size: 4.5rem;
   line-height:auto;
   letter-spacing: auto;
 `
@@ -67,7 +71,7 @@ const Scoreboard = () => {
       <ScoreContainer>
         <ScoreCopyContainer>
           <ScoreTitle>SCORE</ScoreTitle>
-          <ScoreNumber className="points">{score.playerPoints}</ScoreNumber>
+          <ScoreNumber className="points">{localStorage.getItem('player') != undefined? localStorage.getItem('player') :score.playerPoints}</ScoreNumber>
         </ScoreCopyContainer>
       </ScoreContainer>
     </ScoreboardContainer>
