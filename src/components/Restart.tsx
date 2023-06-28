@@ -3,8 +3,8 @@ import { gsap } from "gsap";
 import styled from "@emotion/styled";
 // STATE
 import { ScoreStateContext } from "./Layout";
-import StartRound from "../animations/StartAnimation";
-const breakpoints = [973]
+import RestartAnimation from "../animations/RestartAnimation";
+const breakpoints = [973, 490, 1344, 685, 375, 320]
 const mq = breakpoints.map(bp => `@media (max-width: ${bp}px)`)
 const Restart = () => {
   //? VARIABLES
@@ -15,12 +15,29 @@ const Restart = () => {
     opacity:0;
     visibility: hidden;
     flex-direction:column;
-    position:relative;
+    position:absolute;
     z-index: 5;
-    top:-15em;
+
     ${mq[0]} {
       top:4em;
     }
+    ${mq[1]} {
+      top:10em;
+    }
+    ${mq[2]} {
+      top:3em;
+    }
+    ${mq[3]} {
+      top:0;
+      position:relative
+    }
+    ${mq[4]} {
+      top:6.5em;
+    }
+    ${mq[5]} {
+      top:1.5em;
+    }
+    
     
   `
   const RestartMessage = styled.h1`
@@ -28,18 +45,18 @@ const Restart = () => {
     color: white;
     font-family: 'Barlow Semi Condensed';
     font-weight: 700;
-    margin-bottom: .5em;
-    font-size: 4em;
+    margin-bottom: .3em;
+    font-size: 6em;
   `
   const RestartButton = styled.button`
     background-color: white;
-    padding: 1em 2em;
+    padding: .7em 2em;
     font-family: font-family: 'Barlow Semi Condensed';
     font-weight: 600;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     cursor: pointer;
-    width:12em;
+    width:13em;
     margin:0 auto;
   `
   
@@ -49,11 +66,9 @@ const Restart = () => {
         {score.message}
       </RestartMessage>
       <RestartButton
+        className="restart-button"
         onClick={() => {
-          gsap.to('.underlay', .15, {stagger:.02, display:'none', opacity:0, visbility:'hidden', transform:'scale(0)'})
-          StartRound(score.player,'', score).timeScale(2.5).tweenTo(0).then(() => {
-            StartRound(score.player).clear()
-          })
+          RestartAnimation(score.player, score.playerBg).play()
         }}
       >
         PLAY AGAIN

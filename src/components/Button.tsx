@@ -11,8 +11,8 @@ const Button = (props:any) => {
   background: ${props.color};
   border:none;
   border-radius: 50% 50%;
-  height: 175px;
-  width: 175px;
+  height: 15.5em;
+  width: 15.5em;
   position: absolute;
   z-index:0;
   display:flex;
@@ -24,8 +24,8 @@ const Button = (props:any) => {
     background:white;
     border:none;
     border-radius: 50% 50%;
-    height: 145px;
-    width: 145px;
+    height: 12em;
+    width: 12em;
     position: absolute;
     z-index:1;
     box-shadow: ${props.shadow};
@@ -38,8 +38,8 @@ const Button = (props:any) => {
     background:transparent;
     border:none;
     border-radius: 50% 50%;
-    height: 145px;
-    width: 145px;
+    height: 14.5em;
+    width: 14.5em;
     position: absolute;
     z-index:0;
     display:flex;

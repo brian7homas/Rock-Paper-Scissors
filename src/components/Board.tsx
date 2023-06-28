@@ -25,12 +25,12 @@ const Board = () => {
   const [components, setComponents] = useState(["Restart", "Opponent"]);
   let icon: React.JSX.Element, bg: string
   const breakpoints = [490, 560, 685, 1024]
-  const mobileBP = [375]
+  const mobileBP = [475]
+  const labelBP = [950, 685, 490, 375, 320]
   //? MEDIA QUERIES
-  const mqHeight = breakpoints.map(bp => `@media screen and (min-height: ${bp}px)`)
   const mqWidth = breakpoints.map(bp => `@media screen and (max-width: ${bp}px)`)
-  const mqWidthLandscape = breakpoints.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: landscape)`)
   const mqWidthPortrait = mobileBP.map(bp => `@media screen and (max-width: ${bp}px) and (orientation: portrait)`)
+  const labelMq = labelBP.map(bp => `@media screen and (max-width: ${bp}px)`)
   const { isClient, key } = UseIsClient()
   let houseData = useRef({ game: 0 })
   //! LOAD RESTART COMPONENT USED TO UPDATE SCROREBOARD AND OPPONENT DATA
@@ -39,71 +39,104 @@ const Board = () => {
   }
   //? FUNCTIONS
   const startRound = async (name: string, color: string): Promise<void> => {
-    Rules(name, score)
+    Rules(name, color, score)
     await loadRestart().then(async () => {
       //? START THE ANIMATION
-      await StartAnimation(name, color, score).timeScale(1.2)
+      await StartAnimation(name, color, score).timeScale(1.2).play()
     })
   }
   //? STYLES
   const BoardContainer = styled.section`
-  margin: 8em auto 0 auto;
+  margin: 0 auto 1em auto;
   position:relative;
   display: grid;
   transform: scale(.95);
   max-width: 65vw;
-  ${mqHeight[2]} {
-    margin: -6em auto 0 auto;
-  }
-  ${mqWidth[1]} {
-    transform: scale(.8);
-  }
-  ${mqWidth[0]} {
-    transform: scale(.76);
-    max-width: 100vw;
-  }
-  ${mqWidthLandscape[3]}{
-    margin-top: 17em;
-  }
+  min-height:auto;
+  justify-content:center;
 `
   const PlayerLabel = styled.p`
   display:none;
-  position:absolute;
   opacity:0;
   visibiltiy:hidden;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
-  top: -4em;
-  left: .5em;
-  font-size: 2em;
-  font-weight: 700;
+  top: -5.4em;
+  left: 0;
+  font-size: 2.3em;
+  font-weight: 800;
+  position:relative;
+  letter-spacing: .18em;
+  ${labelMq[0]} {
+    right: -1.5em;
+  }
+  ${labelMq[1]} {
+    right: -1em;
+  }
+  ${labelMq[2]} {
+    padding-top: 2em;
+  }
+  ${labelMq[3]} {
+    position:relative;
+    top:2em;
+    font-size:2.5em;
+    padding:0;
+    align-self: flex-end;
+    letter-spacing: .099em;
+    left:-.3em;
+  }
   `
   const HouseLabel = styled.p`
   display:none;
   opacity:0;
   visibiltiy:hidden;
-  position:absolute;
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
-  top: -4em;
-  right: -1em;
-  font-size: 2em;
+  top: -5.5em;
+  right: -1.9em;
+  font-size: 2.3em;
+  font-weight: 800;
+  position:relative;
+  letter-spacing: .18em;
+  ${labelMq[0]} {
+    right: -1.5em;
+  }
+  ${labelMq[1]} {
+    right: -1em;
+  }
+  ${labelMq[2]} {
+    padding-top: 2em;
+  }
+  ${labelMq[3]} {
+    position:relative;
+    top:2em;
+    font-size:2.5em;
+    padding:0;
+    align-self: flex-end;
+    letter-spacing: .099em;
+    left:1.5em;
+  }
   `
   const IconContainer = styled.div`
     display:flex;
-    justify-content: space-between;
-    width:110%;
+    position: relative;
     ${mqWidth[2]} {
-      width: 140%;
       transform: scale(.8);
     }
     ${mqWidthPortrait[0]}{
       transform: scale(.7);
     }
   `
-  
+  const PlayerContainer = styled.section`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    ${mqWidth[2]}{
+      flex-direction: column-reverse;
+    }
+  `
   /** 
     //! KEEPS CLIENT FROM UPDATING BEFORE SSR TAKES PLACE
     //! W/O isClient - REACT WILL THROW ERROR 418 IN PRODUCTION CODE
@@ -123,18 +156,19 @@ const Board = () => {
             position:absolute;
             z-index:0;
             place-self: center;
+            margin-left: 2.5em;
             ${mqWidthPortrait[0]}{
               transform: scale(.7);
             }
             `}
         />
         
-        <IconContainer>
-
-            <PlayerLabel className="player-label">
+        <IconContainer className="icon-container">
+          <PlayerContainer>
+          <PlayerLabel className="player-label">
               YOU PICKED
             </PlayerLabel>
-            {
+          {
             Data.map((item, i) => (
               <Button
                 key={i}
@@ -148,16 +182,17 @@ const Board = () => {
                 startRound={startRound} />
             ))
           }
+          </PlayerContainer>
 
-          <div>
+          <PlayerContainer>
             <HouseLabel className="house-label">
-              HOUSE PICKED
+              THE HOUSE PICKED
             </HouseLabel>
             {<Opponent
               bg={score.houseBg}
               icon={score.houseIcon}
             />}
-          </div>
+          </PlayerContainer>
           
         </IconContainer>
         {RestartComponent()}
