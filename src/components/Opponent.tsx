@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { ScoreStateContext } from "./Layout";
 import WinnerUnderlay from "./WinnerUnderlay";
+const breakpoints = [320, 375]
+const mq = breakpoints.map(bp => `@media screen and (max-width: ${bp}px)`)
 const Opponent = (props:any) => {
   const score = useContext(ScoreStateContext)
   const OpponentContainer = styled.div`
   border:none;
   border-radius: 50% 50%;
-  height: 175px;
-  width: 175px;
+  height: 15.5em;
+  width: 15.5em;
   position: absolute;
   z-index:0;
   display:flex;
@@ -18,13 +20,16 @@ const Opponent = (props:any) => {
   opacity:0;
   visibility:0;
   z-index:4;
+  ${mq[1]}{
+    left:4em;
+  }
 `
   const OpponentInlay = styled.div`
   background: white;
   border:none;
   border-radius: 50% 50%;
-  height: 145px;
-  width: 145px;
+  height: 12em;
+  width: 12em;
   position: absolute;
   z-index:0;
   display:flex;
