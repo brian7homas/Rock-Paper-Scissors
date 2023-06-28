@@ -39,10 +39,10 @@ const Board = () => {
   }
   //? FUNCTIONS
   const startRound = async (name: string, color: string): Promise<void> => {
-    Rules(name, score)
+    Rules(name, color, score)
     await loadRestart().then(async () => {
       //? START THE ANIMATION
-      await StartAnimation(name, color, score).timeScale(1.2)
+      await StartAnimation(name, color, score).timeScale(1.2).play()
     })
   }
   //? STYLES
@@ -159,7 +159,7 @@ const Board = () => {
             `}
         />
         
-        <IconContainer>
+        <IconContainer className="icon-container">
           <PlayerContainer>
           <PlayerLabel className="player-label">
               YOU PICKED
