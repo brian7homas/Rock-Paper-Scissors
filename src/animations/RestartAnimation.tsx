@@ -24,6 +24,8 @@ const RestartAnimation = (name: string, color: string) => {
   opponentContainer.classList.toggle('initial')
   opponentInlay.classList.toggle('absolute')
   restartContainer.classList.toggle('absolute')
+  gsap.set([`.btn-container--${name}`, '.opponent-container'], { transform: 'scale(1)' })
+  gsap.set('.underlay', { display: 'none', visibility: 'hidden', opacity: 0, transform: 'scale(0)' })
   tl
     //? RESTART CONTAINER
     .fromTo('.restart-container', { display: 'flex', opacity: 1, visibility: 'visible', top: '0' }, { top: '4em', display: 'none', opacity: 0, visibility: 'hidden' }, '<')
