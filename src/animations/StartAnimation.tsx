@@ -8,13 +8,17 @@ const StartAnimation = (name:any, color:null, score:null) => {
   let state = Flip.getState(['.btn', '.restart-container'])
   let animateOut:any = []
   let boardContainerWidth = window.innerWidth
-  let width
+  let width, scale = 'scale(1.25)'
   
   if(boardContainerWidth > 709){
     width = '90%'
   }
   if(boardContainerWidth > 1020){
     width = '50vw'
+  }
+  if(boardContainerWidth == 1344){
+    width = '62vw'
+    scale = 'scale(2)'
   }
   if(boardContainerWidth <= 709){
     width = '100vw'
@@ -50,7 +54,7 @@ const StartAnimation = (name:any, color:null, score:null) => {
 
     //? RECOLOR THE PLAYER ICON
     .from([`.btn-container--${name}`, '.opponent-container'], 1.2, { background: `${color}` }, '<=1.25')
-    .set([`.btn-container--${name}`, '.opponent-container'], { transform: 'scale(1.25)' }, '<')
+    .set([`.btn-container--${name}`, '.opponent-container'], { transform: scale }, '<')
 
     //? DISPLAY THE OPPONENT SELECTION
     .to('.opponent-inlay', { display: 'flex', position: 'relative', visibility: 'visible', opacity: 1 }, '<')
