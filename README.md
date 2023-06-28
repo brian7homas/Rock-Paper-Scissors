@@ -1,4 +1,8 @@
 # Frontend Mentor - Rock, Paper, Scissors solution
+![gif](https://tenor.com/view/big-bang-theory-gif-8080792.gif)
+### Screenshot
+
+![](/rpsls.gif)
 
 This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
@@ -17,32 +21,27 @@ This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](h
 - [Acknowledgments](#acknowledgments)
 
 ## Overview
+Click an icon, see if you've won!
 
 ### The challenge
 
-Users should be able to:
+Users should be able to
 
 - View the optimal layout for the game depending on their device's screen size
 - Play Rock, Paper, Scissors against the computer
-- Maintain the state of the score after refreshing the browser _(optional)_
-- **Bonus**: Play Rock, Paper, Scissors, Lizard, Spock against the computer _(optional)_
+- Maintain the state of the score after refreshing the browser
+- **Bonus**: Play Rock, Paper, Scissors, Lizard, Spock against the computer
 
-### Screenshot
 
-![](./screenshot.jpg)
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
-
-## My process
+- Solution URL: [Click me](https://marvelous-zuccutto-aecfc6.netlify.app/)
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
+- Styled components
 - Flexbox
 - CSS Grid
 - Desktop-first workflow
@@ -52,20 +51,18 @@ Users should be able to:
 
 
 ### What I learned
-
+GSAP Flip is very useful
+React server and client views need to match
+React context seemed to be the best way to manage state 
 
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [GSAP cheatsheet](https://greensock.com/cheatsheet/) - Used to referance timeline control methods.
+- [GSAP Flip documentaion](https://www.google.com/search?client=safari&rls=en&q=gsap+flip&ie=UTF-8&oe=UTF-8) - Documentation for GSAP plugin used for main board animation.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
 - Portfolio Website - [Brian](https://www.brianthomas-develops.com)
-- Frontend Mentor - [@joyreacher](https://www.frontendmentor.io/profile/yourusername)
-
-## Acknowledgments
-
+- Frontend Mentor - [@joyreacher](https://www.frontendmentor.io/profile/joyreacher)
