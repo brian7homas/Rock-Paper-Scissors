@@ -3,8 +3,8 @@ import { gsap } from "gsap";
 import styled from "@emotion/styled";
 // STATE
 import { ScoreStateContext } from "./Layout";
-import StartRound from "../animations/StartAnimation";
-const breakpoints = [973]
+import RestartAnimation from "../animations/RestartAnimation";
+const breakpoints = [973, 490, 1344, 685, 375, 320]
 const mq = breakpoints.map(bp => `@media (max-width: ${bp}px)`)
 const Restart = () => {
   //? VARIABLES
@@ -50,10 +50,7 @@ const Restart = () => {
       </RestartMessage>
       <RestartButton
         onClick={() => {
-          gsap.to('.underlay', .15, {stagger:.02, display:'none', opacity:0, visbility:'hidden', transform:'scale(0)'})
-          StartRound(score.player,'', score).timeScale(2.5).tweenTo(0).then(() => {
-            StartRound(score.player).clear()
-          })
+          RestartAnimation(score.player, score.playerBg).play()
         }}
       >
         PLAY AGAIN
