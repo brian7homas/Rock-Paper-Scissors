@@ -71,7 +71,7 @@ const Scoreboard = () => {
       <ScoreContainer>
         <ScoreCopyContainer>
           <ScoreTitle>SCORE</ScoreTitle>
-          <ScoreNumber className="points">{localStorage.getItem('player') != undefined? localStorage.getItem('player') :score.playerPoints}</ScoreNumber>
+          <ScoreNumber className="points">{!localStorage.getItem('player')? score.playerPoints : localStorage.getItem('player')}</ScoreNumber>
         </ScoreCopyContainer>
       </ScoreContainer>
     </ScoreboardContainer>
