@@ -16,13 +16,18 @@ const IndexPage: React.FC<PageProps> = () => {
               padding:0;
               -ms-overflow-style: none;  /* Internet Explorer 10+ */
               scrollbar-width: none;  /* Firefox */
-            }
+            } 
             *::-webkit-scrollbar { 
               display: none;  /* Safari and Chrome */
             }
             html{
               font-size:62.5%;
-              overflow:hidden;
+            }
+            .initial{
+              position:initial !important;
+            }
+            .absolute{
+              position:absolute !important;
             }
           `}
       />

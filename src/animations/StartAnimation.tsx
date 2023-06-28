@@ -3,7 +3,7 @@ import Flip from "gsap/Flip";
 gsap.registerPlugin(Flip)
 
 let tl = gsap.timeline({paused: true})
-const StartAnimation = (name:any, color:null, score) => {
+const StartAnimation = (name:any, color:null, score:null) => {
   let buttons = gsap.utils.toArray(".btn")
   let state = Flip.getState(['.btn', '.restart-container'])
   let animateOut:any = []
@@ -20,14 +20,16 @@ const StartAnimation = (name:any, color:null, score) => {
     width = '100vw'
   }
   const filterPick = async (arr:any, val:any) => arr.filter((item:any) => {
-    if(item.classList[1] != `btn-container--${val}`) animateOut.push(item)
-    item.classList[1] === `btn-container--${val}`
+    if(item.classList[1] === `btn-container--${val}`) {
+      item.classList.toggle('initial')
+    }
+    if(item.classList[1] != `btn-container--${val}`) {
+      item.classList.toggle('hidden')
+      animateOut.push(item)
+    }
     return animateOut
   })
-  
   filterPick(buttons,name)
-  
-  tl
       Flip.from(state, {
         ease:'power1.out',
         duration:1
