@@ -2,7 +2,7 @@
 ![gif](https://tenor.com/view/big-bang-theory-gif-8080792.gif)
 ### Screenshot
 
-![](/rpsls.gif)
+![](./rpsls.gif)
 
 This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
