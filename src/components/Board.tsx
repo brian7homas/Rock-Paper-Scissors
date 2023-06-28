@@ -62,10 +62,12 @@ const Board = () => {
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
-  top: -4em;
-  left: -1em;
-  font-size: 3em;
-  font-weight: 700;
+  top: -5.4em;
+  left: 0;
+  font-size: 2.3em;
+  font-weight: 800;
+  position:relative;
+  letter-spacing: .18em;
   ${labelMq[0]} {
     right: -1.5em;
   }
@@ -92,10 +94,12 @@ const Board = () => {
   z-index:5;
   font-family: 'Barlow Semi Condensed';
   color: white;
-  top: -4em;
-  right: -2.5em;
-  font-size: 3em;
-  font-weight: 700;
+  top: -5.5em;
+  right: -1.9em;
+  font-size: 2.3em;
+  font-weight: 800;
+  position:relative;
+  letter-spacing: .18em;
   ${labelMq[0]} {
     right: -1.5em;
   }

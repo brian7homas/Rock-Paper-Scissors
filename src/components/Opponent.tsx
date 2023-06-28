@@ -20,6 +20,7 @@ const Opponent = (props:any) => {
   opacity:0;
   visibility:0;
   z-index:4;
+  left:3em;
   ${mq[1]}{
     left:4em;
   }
