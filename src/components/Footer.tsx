@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from '@emotion/react'
-import RulesAnimation from "../animations/RulesOverlay";
+import { PlayOverlay, ReverseOverlay }from "../animations/RulesOverlay";
 import Rules from '../svg/image-rules-bonus.svg'
 const breakpoints = [685, 475, 414, 375, 320]
 
@@ -71,11 +71,15 @@ const RulesContainer = styled.div`
   background: white;
   height: 65vh;
   width: 75vw;
-  display:flex;
+  // display:flex;
   justify-content: center;
   align-items: center;
   max-width:38.0rem;
   max-height: 56.0rem;
+  display:none;
+  visibility: hidden;
+  opacity:0;
+  
   ${mq[1]} {
     max-width:none;
     max-height: none;
@@ -93,24 +97,29 @@ const RulesTitle = styled.p`
   font-size: 3.5em;
   font-family: 'Fjalla One';
   font-weight: 800;
+  display:none;
+  visibility: hidden;
+  opacity:0;
+  
   ${mq[1]} {
     left:4.2em;
     margin: 1em 0;
     top:1.6em;
   }
 `
+
 const Footer = () => {
   return(
     <FooterEl className="footer">
-      <RulesButton onClick={() => RulesAnimation()}>
+      <RulesButton className="rules-button--board" onClick={() => PlayOverlay()}>
         RULES
       </RulesButton>
       <RulesOverlay className="rules-overlay">
-        <RulesContainer>
+        <RulesContainer className="rules-container">
           <RulesTitle className="rules-title">RULES</RulesTitle>
-          <RulesCloseButton onClick={() => RulesAnimation()}>X</RulesCloseButton>
+          <RulesCloseButton className="rules-button" onClick={() => ReverseOverlay()}>X</RulesCloseButton>
           <Rules className="rules" css={css`
-              position: absolute;
+              transform: scale(0);
               ${mq[1]} {
                 transform: scale(.8);
               }
