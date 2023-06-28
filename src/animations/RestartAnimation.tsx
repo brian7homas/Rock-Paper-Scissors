@@ -37,7 +37,8 @@ const RestartAnimation = (name: string, color: string) => {
     .to('.opponent-container', { transform: 'scale(1)', display: 'none', visibility: 'hidden', opacity: 0 }, '0')
     .to('.opponent-inlay', { display: 'none', visibility: 'hidden', opacity: 0 }, '0')
     //? RESET PLAYER CONTAINER BACKGROUND
-    .to(`.btn-container--${name}`, { duration: 1, background: `${color}`, zIndex: 2 }, '<')
+    .to(`.btn-container--${name}`, { duration: 1, background: `${color}`}, '<')
+    .to(`.btn-overlay--${name}`, { zIndex: 0 }, '<')
     //? ITERATE THROUGH HIDDEN BUTTONS AND BOARD PENTAGON
     .fromTo([hidden, '.pentagon'],
       {
