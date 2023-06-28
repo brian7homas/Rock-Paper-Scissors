@@ -7,7 +7,7 @@ const StartAnimation = (name:any, color:null, score:null) => {
   let buttons = gsap.utils.toArray(".btn")
   let state = Flip.getState(['.btn', '.restart-container'])
   let animateOut:any = []
-  let boardContainerWidth = window.screen.width
+  let boardContainerWidth = window.innerWidth
   let width
   
   if(boardContainerWidth > 709){
