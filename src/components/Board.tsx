@@ -47,7 +47,7 @@ const Board = () => {
   }
   //? STYLES
   const BoardContainer = styled.section`
-  margin: 8em auto 0 auto;
+  margin: 0 auto 1em auto;
   position:relative;
   display: grid;
   transform: scale(.95);
