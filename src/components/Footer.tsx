@@ -11,7 +11,7 @@ const FooterEl = styled.footer`
   display:flex;
   justify-content:flex-end;
   width:100%;
-  padding: 0 1em;
+  padding: 0 1em 2em 0;
   ${mqHeight[0]} {
     margin:0 auto 2em auto;
   }
@@ -19,9 +19,6 @@ const FooterEl = styled.footer`
     margin:0 auto 0 auto;
     justify-content: center;
     margin-bottom:3em;
-  }
-  ${mq[4]} {
-    
   }
 `
 const RulesButton = styled.button`
